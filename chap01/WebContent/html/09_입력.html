@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>input 태그를 이용해 사용자로부터 다양한 입력을 받을 수 있다</h3>
+
+
+    <table border="2">
+        <tr>
+            <th>Type</th>
+            <th>입력란</th>
+            <th>설명</th>
+            <th>용도</th>
+        </tr>
+        <tr>
+            <td>type="text"</td>
+            <td><input type="text"></td>
+            <td>일반적인 텍스트를 입력받는 칸</td>
+            <td>아이디, 글 제목 등</td>
+        </tr>
+        <tr>
+            <td>type="password"</td>
+            <td><input type="password"></td>
+            <td>텍스트를 가려주는 입력칸</td>
+            <td>비밀번호</td>
+        </tr>
+        <tr>
+            <td>type="radio</td>
+            <td>
+                <input type="radio" name="favor" id="mayo" checked>
+                <label for="mayo">참치마요</label> <br>
+
+                <input type="radio" name="favor" id="bibim">
+                <label for="bibim">전주비빔</label> <br>
+
+                <input type="radio" name="favor" id="spam">
+                <label for="spam">스팸볶음</label> <br>
+
+                <input type="radio" name="favor" id="gogi">
+                <label for="gogi">고추장불고기</label> <br>
+                <hr>
+                <input type="radio" name="size" checked id="Large">
+                <label for="Large">Large</label><br>
+
+                <input type="radio" name="size" id="Family">
+                <label for="Family">Family</label><br>
+
+                <input type="radio" name="size" id="Small">
+                <label for="Small">Small</label><br>
+            </td>
+            <td>여러가지 중 하나만 선택할 수 있는 버튼
+                <br> 이때 name 속성으로 카테고리를 지정해주어야 함
+            </td>
+            <td>성별, 나이대 등 하나만 선택해야하는 속성</td>
+        </tr>
+        <td>type="checkbox"</td>
+        <td><input type="checkbox" name="swim" id="freestyle">
+            <label for="freestyle">자유형</label><br>
+
+            <input type="checkbox" name="swim" id="frog">
+            <label for="frog">평영</label><br>
+
+            <input type="checkbox" name="swim" id="back">
+            <label for="back">배영</label><br>
+
+            <input type="checkbox" name="swim" id="butterfly">
+            <label for="butterfly">접영</label><br>
+        </td>
+        <td>여러가지 항목 중 여러개를 선택할 수 있는 버튼</td>
+        <td>관심분야 등 여러개를 선택해야 하는 속성</td>
+        </tr>
+
+        <tr>
+            <td>type="date"</td>
+            <td><input type="date"></td>
+            <td>날짜를 입력받는 칸</td>
+            <td>예약 등</td>
+        </tr>
+        <tr>
+            <td>type="email"</td>
+            <td><input type="email"></td>
+            <td>이메일을 입력받는 칸, 약간의 이메일 형식 검사를 해준다</td>
+            <td>이메일</td>
+        </tr>
+        <tr>
+            <td>type="color"</td>
+            <td><input type="color"></td>
+            <td>색상</td>
+            <td>색상</td>
+        </tr>
+        <tr>
+            <td>&lt;textarea&gt;</td>
+            <td><textarea cols="30" rows="10"></textarea></td>
+            <td>아주 긴 내용의 텍스트를 입력할 수 있다</td>
+            <td>글 내용, 문의 내용 등</td>
+        </tr>
+        <tr>
+            <td>&lt;select&gt;</td>
+            <td><select>
+                    <option value="">Account</option>
+                    <option value="">Clerk</option>
+                    <option value="">CEO</option>
+                    <option value="">IT Programmer</option>
+                </select></td>
+            <td>사용자가 여러 옵션 중 하나를 선택할 수 있다</td>
+            <td>외래키 컬럼</td>
+        </tr>
+    </table>
+
+    <h3>form 태그</h3>
+    <form action="" method="GET">
+        ID : <input type="text" name="user_id">
+        PASSWORD : <input type="password" name="user_pw">
+        <input type="submit" value="sign_in">
+    </form>
+
+    <form>
+        <h4>선호하는 수영 경기</h4>
+        <input type="checkbox" name="swim" id="freestyle" value="freestyle">
+        <label for="freestyle">자유형</label>
+
+        <input type="checkbox" name="swim" id="frog" value="frog">
+        <label for="frog">평영</label>
+
+        <input type="checkbox" name="swim" id="back" value="back">
+        <label for="back">배영</label>
+
+        <input type="checkbox" name="swim" id="butterfly" value="butterfly">
+        <label for="butterfly">접영</label>
+        
+        <input type="submit">
+    </form>
+
+    <form id="info" >
+    </form>
+
+    Age: <input type="text" form="info" name="age"><br>
+    phone: <input type="text" form="info" name="phone"><br>
+    <input type="submit" form="info" value="submit">
+
+</body>
+
+</html>

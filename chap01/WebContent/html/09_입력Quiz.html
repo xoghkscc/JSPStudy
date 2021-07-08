@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_Quiz</title>
+
+
+</head>
+
+<body>
+    <p style="text-align: center;">River Cleanup Day</p>
+    <h3 style="text-align: center;">Volunteer Registration</h3>
+
+    <table align="center">
+        <form method="get">
+            <tr>
+                <td>
+                    <b>Full Name</b>
+                </td>
+                <td>
+                    <input type="text" name="first_name" size="20"><br>
+                    First Name
+                </td>
+                <td>
+                    <input type="text" name="last_name"><br>
+                    Last Name
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b style="text-align: left;">Contact No.</b>
+                </td>
+                <td>
+                    <input type="text" name="Area_Code"> - <br>
+                    Area Code
+                </td>
+                <td>
+                    <input type="text" name="Phone_Number"><br>
+                    Phone Number
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>E-mail</b>
+                </td>
+                <td>
+                    <input type="email" name="email" placeholder="ex myname@example.com"
+                        autocomplete="off"><br>
+                    example@example.com
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>What time can <br> you work?</b>
+                </td>
+                <td>
+                    <input type="radio" name="work_time" id="anytime" checked>
+                    <label for="anytime">Any time</label> <br>
+
+                    <input type="radio" name="work_time" id="Noon">
+                    <label for="Noon">8am - Noon</label> <br>
+
+                    <input type="radio" name="work_time" id="5pm">
+                    <label for="5pm">1 - 5pm</label> <br>
+
+                    <input type="radio" name="work_time" id="Other">
+                    <label for="Other">Other</label> <br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Interested in:</b>
+                </td>
+                <td>
+                    <input type="checkbox" name="interested" id="cleaning">
+                    <label for="cleaning">Cleaning</label><br>
+
+                    <input type="checkbox" name="interested" id="Transportation">
+                    <label for="Transportation">Transportation</label><br>
+
+                    <input type="checkbox" name="interested" id="Needed" checked>
+                    <label for="Needed">Wherever Needed</label><br>
+
+                    <input type="checkbox" name="interested" id="Service">
+                    <label for="Service">Food Service</label><br>
+
+                    <input type="checkbox" name="interested" id="Aid">
+                    <label for="Aid">First Aid</label><br>
+
+                    <input type="checkbox" name="interested" id="Other">
+                    <label for="Other">Other</label><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Comments></b>
+                </td>
+                <td colspan="2">
+                    <textarea name="comments" id="comments" cols="40" rows="10"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <th colspan="3">
+                    <input type="submit">
+                </th>
+            </tr>
+        </form>
+    </table>
+
+
+</body>
+
+</html>
