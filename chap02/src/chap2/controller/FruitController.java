@@ -25,25 +25,22 @@ public class FruitController extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String fruit = req.getParameter("fruit");
-		System.out.println("클라이언트가 클릭한 과일:" + fruit);
-		//해당 과일 이름의 파일의 내용을 읽어서 sysout으로 출력해보세요
-		File file = new File(String.format("C:\\Users\\xoghk\\OneDrive\\바탕 화면\\공부\\국비\\git\\JSPStudy\\chap02\\files\\%s.txt", fruit));
+		// 해당 과일 이름의 파일의 내용을 읽어서 sysout으로 출력해보세요
+		File file = new File(String
+				.format("C:\\Users\\xoghk\\OneDrive\\바탕 화면\\공부\\국비\\git\\JSPStudy\\chap02\\files\\%s.txt", fruit));
 		BufferedReader bin = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 		String line = null;
 		StringBuilder sb = new StringBuilder();
-		while((line = bin.readLine()) != null) {
+		while ((line = bin.readLine()) != null) {
 			sb.append(line);
 		}
 		req.setAttribute("fruitName", fruit);
 		req.setAttribute("fruitDetail", sb);
-		
 
 		req.setAttribute("apple1", new Apple());
 		req.setAttribute("apple2", new Apple());
 		req.setAttribute("apple3", new Apple());
-		req.setAttribute("appleArray",new Apple[] {new Apple(), new Apple(), new Apple(), new Apple()});
-		
-		
+		req.setAttribute("appleArray", new Apple[] { new Apple(), new Apple(), new Apple(), new Apple() });
 		req.getRequestDispatcher("/attribute/view/fruitDetail.jsp").forward(req, resp);
 //		resp.sendRedirect("/chap02/attribute/fruitSelector.jsp");
 	}
