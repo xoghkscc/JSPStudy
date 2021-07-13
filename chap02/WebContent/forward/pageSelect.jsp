@@ -15,5 +15,14 @@
 		<input type="radio" name="page" value="3"> <label>page3</label>
 		<input type="submit" value="이동" />
 	</form>
+
+	<%
+		try {
+			if (request.getParameter("page").equals("3")) {
+				out.print(request.getParameter("page") + "입니다");
+			}
+		} catch (Exception e) {
+		}
+	%>
 </body>
 </html>
