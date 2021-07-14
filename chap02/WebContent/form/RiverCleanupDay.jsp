@@ -6,9 +6,9 @@
 <meta charset="EUC-KR">
 <title>River Cleanup Day Registration</title>
 <style>
-	td {
-	padding-bottom: 20px 
-	}
+td {
+	padding-bottom: 20px
+}
 </style>
 
 
@@ -16,7 +16,7 @@
 <body>
 	<form action="../river/register" method="post" id="registForm"></form>
 
-	
+
 	<table style="margin: auto;">
 		<tr>
 			<th colspan="3">
@@ -27,8 +27,10 @@
 		</tr>
 		<tr>
 			<td><b>Full Name</b></td>
-			<td><input name="first-name" form="registForm" type="text" size="15"> <br> First Name</td>
-			<td><input name="last-name" form="registForm" type="text" size="15"> <br> Last Name</td>
+			<td><input name="first-name" form="registForm" type="text"
+				size="15"> <br> First Name</td>
+			<td><input name="last-name" form="registForm" type="text"
+				size="15"> <br> Last Name</td>
 		</tr>
 		<tr>
 			<td><b>Contact No.</b></td>
