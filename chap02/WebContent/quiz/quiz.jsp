@@ -40,19 +40,13 @@
 	<%
 	//아직 로그인을 하지 않았을 때에 작동하는 코드
 	} else {
-	Quizmodel ud = (Quizmodel) session.getAttribute("login");
-	out.print(ud);
 	%>
+	${login }
 	<button id="logout">로그아웃</button>
 	<script>
 		var logout = document.getElementById("logout");
 		logout.addEventListener('click', (e) => {
 		location.href = "./removeLogin.jsp";
-<%-- 		<% --%>
-// 		session.removeAttribute("login");
-// 		session.removeAttribute("loginfalse");
-// 		response.sendRedirect("/chap02/quiz/quiz.jsp");
-<%-- 		%> --%>
 	})</script>
 	<%
 	//로그인을 하였을 때에 작동하는 코드

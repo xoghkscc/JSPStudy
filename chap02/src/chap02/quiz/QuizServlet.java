@@ -35,9 +35,9 @@ public class QuizServlet extends HttpServlet {
 
 		String user_id = req.getParameter("id");
 		String user_pw = req.getParameter("pw");
-		
+
 		HttpSession session = req.getSession();
-		
+
 		Quizmodel ud = new Quizmodel("0", "0", "0");// 초기값 설정
 
 		String sql = String.format("SELECT * FROM login WHERE user_id='%s'", user_id);
@@ -73,7 +73,7 @@ public class QuizServlet extends HttpServlet {
 			return false;
 		}
 	}
-
+	
 	public String getSha256(String text) {
 		StringBuilder sb = new StringBuilder();
 		try {
