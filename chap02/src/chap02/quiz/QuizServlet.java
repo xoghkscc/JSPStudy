@@ -30,18 +30,15 @@ public class QuizServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			//서블릿에서 DB와 연동을 하려면 Class.forName이 필수이다!!
-		} catch (Exception e) {
-		}
-
 		HikariCP cp = new HikariCP();
 		HikariDataSource ds = cp.getHikariDataSource();
+
 		String user_id = req.getParameter("id");
 		String user_pw = req.getParameter("pw");
+		
 		HttpSession session = req.getSession();
-		Quizmodel ud = new Quizmodel("0", "0", "0");//초기값 설정
+		
+		Quizmodel ud = new Quizmodel("0", "0", "0");// 초기값 설정
 
 		String sql = String.format("SELECT * FROM login WHERE user_id='%s'", user_id);
 
@@ -55,17 +52,17 @@ public class QuizServlet extends HttpServlet {
 			// TODO: handle exception
 		}
 
-		if (loginJudgment(user_id, user_pw, ud)) {//유저가 입력한 정보와 db에 저장된 정보가 일치하는지 판단하는 메서드
-			session.setAttribute("login", ud);//아이디와 비밀번호가 일치한다면 login이라는 attribute에 ud를 실어나름
+		if (loginJudgment(user_id, user_pw, ud)) {// 유저가 입력한 정보와 db에 저장된 정보가 일치하는지 판단하는 메서드
+			session.setAttribute("login", ud);// 아이디와 비밀번호가 일치한다면 login이라는 attribute에 ud를 실어나름
 		} else {
-			session.setAttribute("loginfalse", "false");//아이디와 비밀번호가 일치하지 않다면 loginfalse에 아무거나 실어 나름
+			session.setAttribute("loginfalse", "false");// 아이디와 비밀번호가 일치하지 않다면 loginfalse에 아무거나 실어 나름
 		}
 
-		resp.sendRedirect("/chap02/quiz/quiz.jsp");
+		resp.sendRedirect("./quiz/quiz.jsp");
 	}
 
 	public boolean loginJudgment(String user_id, String user_pw, Quizmodel ud) {
-		String user_pw_secret = getSha256(user_pw);//유저가 입력한 pw를 SHA-256 암호화로 바꿔주는 메서드
+		String user_pw_secret = getSha256(user_pw);// 유저가 입력한 pw를 SHA-256 암호화로 바꿔주는 메서드
 		if (user_id.equals(ud.id)) {
 			if (user_pw_secret.equals(ud.pw.trim())) {
 				return true;
@@ -83,7 +80,7 @@ public class QuizServlet extends HttpServlet {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			md.update(text.getBytes());
 			byte[] byteData = md.digest();
-			for (int i = 0; i< byteData.length; i++) {
+			for (int i = 0; i < byteData.length; i++) {
 				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
 			}
 		} catch (NoSuchAlgorithmException e) {
@@ -93,4 +90,3 @@ public class QuizServlet extends HttpServlet {
 		return sb.toString().trim();
 	}
 }
-

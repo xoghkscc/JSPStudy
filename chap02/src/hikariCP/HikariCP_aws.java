@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class HikariCP {
+public class HikariCP_aws {
 	HikariDataSource ds;
 
-	public HikariCP() {
+	public HikariCP_aws() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			//서블릿에서 DB와 연동을 하려면 Class.forName이 필수이다!!
@@ -19,10 +19,10 @@ public class HikariCP {
 		}
 		
 		HikariConfig config = new HikariConfig();
-//		config.setJdbcUrl("jdbc:oracle:thin:@3.35.52.40:1521:xe");//내 aws ec2 서버
-		config.setJdbcUrl("jdbc:oracle:thin:@localhost/XEPDB1");//내 로컬 서버
-		config.setUsername("java1");
-		config.setPassword("1234");
+		config.setJdbcUrl("jdbc:oracle:thin:@3.35.52.40:1521:xe");//내 aws ec2 서버
+//		config.setJdbcUrl("jdbc:oracle:thin:@localhost/XEPDB1");//내 로컬 서버
+		config.setUsername("user_id");
+		config.setPassword("user_pw");
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

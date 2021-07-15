@@ -1,4 +1,4 @@
-package chap2.controller;
+package chap02.controller;
 
 import java.io.IOException;
 

@@ -19,25 +19,26 @@
 	<!-- 		<li>로그아웃 기능도 구현해야함</li> -->
 	<!-- 	</ol> -->
 	<%
-	if(session.getAttribute("loginfalse") != null){
+	if (session.getAttribute("loginfalse") != null) {
 	%>
 	<script>
 	alert('아이디 혹은 비밀번호가 틀렸습니다.');
 	location.href = "./removeLogin.jsp";
 	</script>
-	<%}
+	<%
+	}
 	//로그인을 실패하였을 경우에 작동하는 코드
 	%>
-	
+
 	<%
 	if ((session.getAttribute("login")) == null) {
 	%>
 	<form id="sessionForm" action="../quiz_servlet">
 		<label>아이디</label> <input type="text" name="id" /> <label>비번</label>
-		<input type="text" name="pw" /> <input type="submit"
-			value="로그인" />
+		<input type="text" name="pw" /> <input type="submit" value="로그인" />
 	</form>
-	<%//아직 로그인을 하지 않았을 때에 작동하는 코드
+	<%
+	//아직 로그인을 하지 않았을 때에 작동하는 코드
 	} else {
 	Quizmodel ud = (Quizmodel) session.getAttribute("login");
 	out.print(ud);
@@ -46,7 +47,12 @@
 	<script>
 		var logout = document.getElementById("logout");
 		logout.addEventListener('click', (e) => {
-			location.href = "./removeLogin.jsp";
+		location.href = "./removeLogin.jsp";
+<%-- 		<% --%>
+// 		session.removeAttribute("login");
+// 		session.removeAttribute("loginfalse");
+// 		response.sendRedirect("/chap02/quiz/quiz.jsp");
+<%-- 		%> --%>
 	})</script>
 	<%
 	//로그인을 하였을 때에 작동하는 코드
