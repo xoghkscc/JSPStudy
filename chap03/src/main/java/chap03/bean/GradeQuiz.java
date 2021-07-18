@@ -28,14 +28,14 @@ public class GradeQuiz extends HttpServlet {
 			session.setAttribute("id", 1);
 		} else {
 			session.setAttribute("id", ((int) session.getAttribute("id")) + 1);
-		}
+		}	
 
 		if (session.getAttribute("rankList") == null) {
 			rankList = new TreeSet<Student>();
 		} else {
 			rankList = (TreeSet<Student>) session.getAttribute("rankList");
 		}
-
+		
 		Student st = new Student();
 		st.setId((int) session.getAttribute("id"));
 		st.setName(req.getParameter("name"));

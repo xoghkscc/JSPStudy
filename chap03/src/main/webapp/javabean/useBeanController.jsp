@@ -13,5 +13,6 @@
 	<!-- stu.setName(request.getParameter("name");-->
 	<!-- stu.setKor(request.getParameter("kor");... ¿Í °°´Ù-->
 	<p>${stu.name }, ${stu.kor }, ${stu.eng }, ${stu.math }</p>
+	<jsp:getProperty property="kor" name="stu"/>
 </body>
 </html>
