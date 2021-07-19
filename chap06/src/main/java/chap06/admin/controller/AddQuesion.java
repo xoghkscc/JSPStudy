@@ -13,7 +13,6 @@ public class AddQuesion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("여기까지 됨");
 		request.getRequestDispatcher("/WEB-INF/admin/addQuestion.jsp").forward(request, response);
 	}
 

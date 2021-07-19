@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
-  <display-name>chap06</display-name>
-  <welcome-file-list>
-    <welcome-file>/WEB-INF/index/index.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-  	<servlet-name>main</servlet-name>
-  	<servlet-class>chap06.main.controller.MainPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>main</servlet-name>
-  	<url-pattern>/home</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+	<display-name>chap06</display-name>
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/index/index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>main</servlet-name>
+		<servlet-class>chap06.main.controller.MainPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>main</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>game_page</servlet-name>
+		<servlet-class>chap06.admin.controller.GameServelet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>game_page</servlet-name>
+		<url-pattern>/gamePage/</url-pattern>
+	</servlet-mapping>
 </web-app>
