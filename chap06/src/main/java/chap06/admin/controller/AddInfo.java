@@ -24,13 +24,14 @@ public class AddInfo extends HttpServlet {
 
 	ArrayList<WorldCup> wcList;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		addWorldCupDb(request);
 		wcList = getWorldCupDb();
 		request.setAttribute("wcList", wcList);
 		request.setAttribute("q_count", wcList.size());
-		request.getRequestDispatcher("WEB-INF/index/index.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/home");
 	}
 
 	public void addWorldCupDb(HttpServletRequest request) {

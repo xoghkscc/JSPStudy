@@ -16,9 +16,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import hikariCP.HikariCP;
 
-/**
- * Servlet implementation class GameServelet
- */
 public class GameServelet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -37,7 +34,6 @@ public class GameServelet extends HttpServlet {
 		
 		HikariCP cp = new HikariCP();
 		HikariDataSource ds = cp.getHikariDataSource();
-		
 		String sql = String.format("SELECT * FROM worldcup_item WHERE wid = %d", wid);
 		
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)){
