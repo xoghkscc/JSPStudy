@@ -258,11 +258,30 @@ ${param.name}
 * c:set : setAttribute를 편하게 사용할 수 있다
 scope도 설정가능 -> page, request, session, application
  ```C
- <c:sed var="fruit" value="apple" />
+ <c:set var="fruit" value="apple" />
  ${fruit}
  ```
 * c:if : if문을 편하게 사용할 수 있다. else if, else는 없다.
+```C
+<c:if test="true>
+	<p>if문에서 실행될 문장</p>
+</c:if>
+```
 * c:choose : if, else if, else처럼 사용되는 조건문, c:when, c:otherwise와 함께 사용한다.
+```C
+<c:set var="color" value="blue"></c:set>
+	<c:choose>
+		<c:when test="${empty color }">
+			<p>color 어트리뷰트가 비어있습니다.</p>
+		</c:when>
+		<c:when test="${color == 'red' }">
+			<p>color가 빨간색</p>
+		</c:when>
+		<c:otherwise>
+			<p style="color: ${color};">빨간색 이외의 색상입니다.</p>
+		</c:otherwise>
+	</c:choose>
+```
 * c:forEach : 숫자 또는 iterable 객체를 이용해 반복문을 간편하게 작성할 수 있다.
     * varStatus.first : 첫 번째 반복일 때 true
     * varStatus.last : 마지막 반복일 때 true
@@ -270,16 +289,51 @@ scope도 설정가능 -> page, request, session, application
     * varStatus.count : 몇 개째인지 알 수 있음(1 base)
     * varStatus.begin : 몇부터 시작했는지 알 수 있음
     * varStatus.end : 언제 끝나는지 알 수 있음
+```C
+<c:forEach begin="0" end="10" var="i" varStatus="status">
+	<div>이 반복문은 ${status.begin }부터 시작하여 ${status.end }에서 끝남</div>
+</c:forEach>
+```
 * c:forTokens : 문자열을 split 한 뒤 하나씩 꺼내며 반복할 수 있다.
+```C
+<c:forEach items="${list }" var="item" varStatus="status">
+	${status.count }. ${item }
+</c:forEach>
+```
 * c:redirect : 간편하게 리다이렉트 할 수 있다.
+```C
+<c:if test="${empty login }">
+	<c:redirect url="http://naver.com"></c:redirect>
+</c:if>
+```
 * c:url : 복잡한 URL을 좀 더 편히라게 생성할 수 있다.
+```C
+만들어진 URL:
+	<c:url value="/news/add"><!-- /chap04/news/add -->
+		<c:param name="type" value="weather"></c:param>
+		<c:param name="reporter" value="waitingPark"></c:param>
+	</c:url>
+	원래 URL만드는 방식: <%= request.getContextPath() %>/news/add?type=<%="type" %>&reporter=<%="reporter" %>
+```
+## 19. web.xml
+* WebApplication Deployment Descriptor
+* 톰캣에 현재 웹 어플리케이션에 대한 여러가지 설정을 전달할 수 있다.
+* 웹 서버 프로그램이 톰캣에 실행될 때마다 톰캣이 이 설정파일을 초기화에 사용한다.	
+### welcome-file-list
+* ContextRoot로 접속한 사용자에게 보여줄 페이지를 설정한다(ContextRoot: 해당 프로젝트의 root 경로)
+* web.xml에서 사용하는 경로는 webapp(WebContent)에서 시작한다.
+## 20. WEB-INF 폴더
+* WEB-INF 폴더에 있는 웹 페이지들은 폴더 경로를 통해 직접 접속할 수 없다
+* 반드시 web.xml 또는 포워드(또는 include)를 이용해 연결되어야 한다.
+* web.xml의 매핑 기능을 WEB-INF폴더와 함께 사용하면 URL과 실제 파일이 위치하고 있는 경로를 별개의 것으로 취급하여 사용할 수 있다.
+* 장점: 실제 프로젝트 구조를 들키지 않을 수 있다. 확장자를 URI에서 제거할 수 있다.
+단점: 매핑 없이는 절대로 직접 접근할 수 없다.
+### <servlet>을 이용해 web.xml에 사용할 JSP파일 또는 서블릿을 등록할 수 있다.
+* <servlet-name>: 사용할 서블릿의 이름
+* <jsp-file>: 실제 파일의 위치
 
- 
- 
- 
- 
- 
- 
- 
+
+
+
  
 
