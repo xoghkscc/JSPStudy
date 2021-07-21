@@ -123,11 +123,163 @@ Apple apple = (Apple)req.getAttribute("apple1");
 ${fruitName}
 ${apple1.price}
 ```
-## 12, forward와 redirect의 차이점
+## 12. forward와 redirect의 차이점
+![1](https://user-images.githubusercontent.com/82793713/126425790-882dfcb3-0d1e-491b-adf8-23ad2836d7bb.png)
+![2](https://user-images.githubusercontent.com/82793713/126425791-f8142f2f-4eb9-493f-9c5d-630216afca55.png)
 
+### forward
+* 동일한 web container에 있는 페이지로만 이동 가능
+* 현재 실행중인 페이지와 forward에 의해 호출될 페이지는 requestm response 객체를 공유
+* forward방식은 다음 이동한 URL로 요청정보를 그대로 전달한다. 그렇기 때문에 사용자가 최초로 요청한 요청정보는 다음 URl에서도 유효함
+### redirect
+* 웹 브라우저는 URl을 지시된 주소로 바꾸고 그 주소로 이동한다
+* 다른 web container에 있는 주소오 이동이 가능하다
+* 새로운 페이지에서는 request, response 객체가 새롭게 생성됨
 
+1.  URL의 변화 여부(redirect: 변화 O, forward: 변화 X)
+2.  객체의 재사용 여부(redirect: 재사용 X, forward: 재사용 O)
+## 13. JSP 객체의 Scope
+* JSP 객체의 수명은 설정된 Scope에 따라 달라진다.
+* page: 페이지 스코프에 설정된 Attribute는 지역변수처럼 해당 페이지(서블릿)를 벗어나면 사라진다.
+* request: request 스코프에 설정된 Attribute는 응답이 발생하기 전까지 수명이 유지된다.
+* session: 사용자의 세션이 만료될때까지 수명이 유지된다. 세션은 브라우저 별로 존재한다.
+-> IP주소가 같더라도 다른 브라우저를 사용하면 서버로부터 새로운 세션을 받아갈 수 있다.
+* application: 어플리케이션 스코프에 저장하는 Attribute는 서버가 꺼질때까지 유지된다.
+## 14. 세션(session)
+1.	사용자가 서버로 요청을 보낸다
+2.	요청이 올바르다면 서버는 알맞은 응답을 보낸다. 추가로 세션ID도 함께 보낸다.
+3.	사용자의 웹 브라우저에 첫 번째 응답과 세션ID가 함께 도착한다.
+4.	해당 웹서버에 다시 요청을 보냘 때 브라우저에 저장된 세선ID가 함께 전송된다
+웹 서버는 해당 세션 ID를 이용해 사용자를 식별한다
+5.	세션 ID는 사용자의 웹 브라우저가 종료될때까지 유지된다.
+6.	세션 Attribute에 저장하는 자바 객체들은 사용자의 세션이 만료될때까지 살아있게 된다.
 
+```C
+session.setMaxInactiveInterval(sec) : 설정하지 않으면 기본 30분 후에 만료되며 sec넣은 값 동안 사용자의 요청이 없으면 만료되는 세션
+session.invalidate : 세션을 만료시킨다.
+session.removeAttribute("choice"); : 해당하는 세션을 지운다.
+```
+* 서블릿에서는 session, application은 내장 객체가 아니므로 따로 뽑아줘야함
+```C
+ServletContext application = req.getServletContext();
+HttpSession session = req.getSession();
+```
+## 15. 외부 라이브러리 사용하기
+### Dynamic Web Project에 외부 라이브러리를 사용하기 위해서는 WEB-INF/lib 폴더에 .kar 등을 넣어줘야 한다.
+## 16. 자바빈 객체(JavaBean Object)
+* JSP에서 데이터를 편리하게 주고받기 위한 클래스의 표준 형식
+* 자바빈 표준에 맞춰 정의한 클래스는 JSP에서 편리하게 사용할 수 있다.
+### 자바빈 객체의 규칙
+* 반드시 public class여야 한다.
+* 기본 생성자가 반드시 존재해야 한다.
+* 필드의 접근 제어자가 private이어야 한다.
+* 필드에는 반드시 getter/setter를 통해 접근해야 한다.
+(이때 getter/setter의 메서드명이 규칙에 맞지 않으면 JSP의 편리한 기능을 이용할 수 없다.
+### jsp:setPropetry
+* 빈 객체의 필드를 채우는 기능을 하는 jsp태그
+* property 속성에 *를 설정하면 파라미터의 값을 이용해 자동으로 빈 객체의 필드를 채운다
+* 해당 빈 객체의 setter를 사용한다
+* input태그의 name값과 클래스의 필드명을 일치시키면 자동으로 매핑해주는 경우가 굉장히 많다
+```C
+//form.jsp
 
+<form action="./useBeanController.jsp">
+	<label>이름</label> <input type="text" name="name" autocomplete="false" />
+	<label>국어점수</label><input type="number" name="kor" /> 
+	<label>영어점수</label><input type="number" name="eng" /> 
+	<label>수학점수</label><input type="number" name="math" /> 
+	<input type="submit" value="보내기" />
+</form>
+  -->여기서 전달한 name, kor, eng, math에 대해서
+```
+```C
+//useBeanController.jsp
 
+<jsp:useBean id="stu" class="chap03.bean.Student" scope="session"></jsp:useBean>
+	<jsp:setProperty property="*" name="stu" />
+```
+## 16. JSP의 여러가지 charset 설정
+1.	mata 태그의 charset 설정 : 클라이언트의 웹 브라우저가 페이지를 해석할 때 사용할 charset을 설정한다
+2.	pageEncoding의 charset 설정 : 이 JSP 코드들을 서블릿으로 변환할 때 사용할 charset을 의미한다
+3.	contentType의 charset 설정 : 서블릿 결과물의 종류 및 인코딩 타입을 설정한다.
 
+### 이때 tomcat의 기본 설정은 utf-8이므로 EUC-KR로 바꾸려면 톰캣의 설정을 바꾸면 됨
+#### server.xml의 Source부분에서 Connector태그의 URIEncoding=”EUC-KR”로 수정하면 됨
+## 17. EL
+#### .jsp에서는 EL을 통해 Attribute에 실려있는 값들을 편리하게 사용할 수 있다
+```C
+<%
+	pageContext.setAttribute("most", "티모");
+	request.setAttribute("most", "가렌");
+	session.setAttribute("most", "다리우스");
+	application.setAttribute("most", "야스오");
+%>
+	<li>그냥 출력: ${most }(가장 좁은 범위의 어트리뷰트가 선택됨-page)</li><%-- 티모 --%>
+	<li>request를 출력: ${requestScope.most }</li><%-- 가렌 --%>
+	<li>session를 출력: ${sessionScope.most }</li><%-- 다리우스 --%>
+	<li>application를 출력: ${applicationScope.most }</li><%-- 야스오 --%>
+```
+#### EL을 통해 파라미터에 저장되어 있는 값 쉽게 출력하기
+```C
+${param.name}
+```
+#### EL의 리터럴
+```C
+<ul>
+	<li>boolean : ${true }, ${false }</li>
+	<li>정수 : ${123 }, ${234 }, ${123 + 456 }, ${5*30 }</li>
+	<li>실수 : ${123.123 * 3 }, ${234 }, ${123 + 456 }, ${5*30 }</li>
+	<li>문자열 : ${'hello ,world' }</li>
+</ul>
+```
+### EL의 비교연산
+```C
+<!-- 비교: ==, !, eq, ne, lt, gt, le, ge...  -->
+	3이 7보다 큰가요? : ${3 > 7 }, ${3 gt 7 }
+  
+<!-- 논리: and, or, not, &&, ||, ! -->
+	${requestScope.most < sessionScope.most }
+<!-- empty: "" 또는 null일 때 true -->
+	${empty value1}
+```
+## 18. JSTL
+### JSTL 작업환경 구축하기
+1. 구글 jstl lib 검색 후 공식 홈페이지에서 다운로드를 누르면 https://tomcat.apache.org/download-taglibs.cgi 페이지로 이동
+2. Impl, Spec, EL에 대한 jar를 다운하여 WEB-INF/lib에 넣는다
+3. .jsp 맨 상단에 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>을 붙여줘야 함
+### JSTL
+* JSP에서 JAVA코드를 사용하기에 너무 불편해서 나온 라이브러리
+* JAVA의 여러가지 기능을 태그 형태로 사용할 수 있다.
+* JAVA의 모든 기능을 사용할 수 있는 것은 아니지만 유용하다.
+* JSP코드를 깔끔하게 유지할 수 있다.
+### JSTL core
+* 데이터들을 다룰 때는 서블릿(자바)에서 하고 화면에 쉽게 표현하고 싶을 때 쓰는 것
+* 자바의 주요 기능들이 구현되어 있는 커스텀 태그 라이브러리
+* c:set : setAttribute를 편하게 사용할 수 있다
+scope도 설정가능 -> page, request, session, application
+ ```C
+ <c:sed var="fruit" value="apple" />
+ ${fruit}
+ ```
+* c:if : if문을 편하게 사용할 수 있다. else if, else는 없다.
+* c:choose : if, else if, else처럼 사용되는 조건문, c:when, c:otherwise와 함께 사용한다.
+* c:forEach : 숫자 또는 iterable 객체를 이용해 반복문을 간편하게 작성할 수 있다.
+    * varStatus.first : 첫 번째 반복일 때 true
+    * varStatus.last : 마지막 반복일 때 true
+    * varStatus.index : 몇 번째 반복인지 알 수 있음(0 base)
+    * varStatus.count : 몇 개째인지 알 수 있음(1 base)
+    * varStatus.begin : 몇부터 시작했는지 알 수 있음
+    * varStatus.end : 언제 끝나는지 알 수 있음
+* c:forTokens : 문자열을 split 한 뒤 하나씩 꺼내며 반복할 수 있다.
+* c:redirect : 간편하게 리다이렉트 할 수 있다.
+* c:url : 복잡한 URL을 좀 더 편히라게 생성할 수 있다.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
