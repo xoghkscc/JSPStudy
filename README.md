@@ -112,9 +112,18 @@ req.setAttribute("appleArray", new Apple[] {new Apple(), new Apple(), new Apple(
 
 Apple apple = (Apple)req.getAttribute("apple1");
 ```
-## 11. Attribute에 (7p)
-
-
+## 11. Attribute에 들어있는 값들을 쉽게 꺼내 쓰는 방법
+* ${“AttributeName”}
+* Attribute에 들어있는 오브젝트를 쉽게 꺼내 쓸 수 있다.
+* JSP를 서블릿으로 변환하는 과정에서 해당 클래스의 toString()을 호출하여 html 페이지에 출력한다.
+* EL을 통해 인스턴스의 필드값에 접근하면 해당 필드의 getter를 자동으로 호출한다.
+* Attribute에 들어있는 값이 인스턴스인 경우 .찍고 필드명을 쓰면 해당 필드의 getter를 자동으로 호출한다.-->getter가 없으면 에러
+(파라미터에 들어있으면 매번 코드를 써야하지만 얘는 간단하게 꺼내기 가능)
+```C
+${fruitName}
+${apple1.price}
+```
+## 12, forward와 redirect의 차이점
 
 
 
