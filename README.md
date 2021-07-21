@@ -328,12 +328,33 @@ scope도 설정가능 -> page, request, session, application
 * web.xml의 매핑 기능을 WEB-INF폴더와 함께 사용하면 URL과 실제 파일이 위치하고 있는 경로를 별개의 것으로 취급하여 사용할 수 있다.
 * 장점: 실제 프로젝트 구조를 들키지 않을 수 있다. 확장자를 URI에서 제거할 수 있다.
 단점: 매핑 없이는 절대로 직접 접근할 수 없다.
-### <servlet>을 이용해 web.xml에 사용할 JSP파일 또는 서블릿을 등록할 수 있다.
-* <servlet-name>: 사용할 서블릿의 이름
-* <jsp-file>: 실제 파일의 위치
+
+### servlet을 이용해 web.xml에 사용할 JSP파일 또는 서블릿을 등록할 수 있다.
+* servlet-name: 사용할 서블릿의 이름
+* jsp-file: 실제 파일의 위치
+```C
+<servlet>
+	<servlet-name>cafe_home</servlet-name>
+	<jsp-file>/WEB-INF/cafe/home.jsp</jsp-file>
+</servlet>
+```
+### servlet-mapping을 통해 등록되어 있는 서블릿들을 원하는 URL과 매핑시킬 수 있다.
+* servlet-name: 등록되어 있는 서블릿 이름들 중 사용할 서블릿을 선택
+* url-pattern: 어떤 url로 접속했을 때 선택한 서블릿으로 연결할지 설정
+* url-pattern에는 *를 사용할 수 있다.
+* 하나의 서블릿에 여러 개의 url이 매핑될 수 있다.
+```C
+<servlet>
+	<servlet-name>blog_home</servlet-name>
+	<servlet-class>chap05.blog.controller.BlogHomeController
+	</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>blog_home</servlet-name>
+	<url-pattern>/blog/</url-pattern>
+</servlet-mapping>
+```
 
 
-
-
- 
 
