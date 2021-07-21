@@ -165,7 +165,7 @@ ServletContext application = req.getServletContext();
 HttpSession session = req.getSession();
 ```
 ## 15. 외부 라이브러리 사용하기
-### Dynamic Web Project에 외부 라이브러리를 사용하기 위해서는 WEB-INF/lib 폴더에 .kar 등을 넣어줘야 한다.
+### Dynamic Web Project에 외부 라이브러리를 사용하기 위해서는 WEB-INF/lib 폴더에 .jar 등을 넣어줘야 한다.
 ## 16. 자바빈 객체(JavaBean Object)
 * JSP에서 데이터를 편리하게 주고받기 위한 클래스의 표준 형식
 * 자바빈 표준에 맞춰 정의한 클래스는 JSP에서 편리하게 사용할 수 있다.
