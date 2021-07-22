@@ -355,6 +355,24 @@ scope도 설정가능 -> page, request, session, application
 	<url-pattern>/blog/</url-pattern>
 </servlet-mapping>
 ```
-
-
+## 20. jsp 파일 분리해서 객체처럼 쓰는 방법
+### .jsp 파일에서 include 하기 
+```C
+<jsp:include page="./sub.jsp"></jsp:include>
+```
+* 서블릿에서 forward로 넘긴 request, response를 넘겨받은 jsp에서 또다른 jsp로 include
+* include 할 때 <%@ include file="./sub.jsp" %>로 가능
+#### 이때 <jsp:include>는 그 파일에 있는 실행 결과를 가져오는 것이고 <% include %>는 그 파일에 있는 코드 자체를 가져오는 것임
+이를 통해 <% include %>에서 선언한 변수 및 script를 그대로 쓸 수 있음
+## 21. 초기화 파라미터(Init Parameter)
+* 톰캣을 구동할 때 해당 서버 프로그램에서 사용할 변수들을 가장 먼저 초기화 하는 것
+* context-param에 등록하는 초기화 파라미터는 모든 서블릿에서 사용할 수 있다
+* 각 <servlet>에 등록하는 초기화 파라미터는 해당 서블릿에서만 사용할 수 있다
+ ### 서블릿에서 init() 메서드는 초기화될 때 (톰캣이 처음 실행될 때 딱 한번 실행되는 메서드) 실행되는 메서드
+## 22. url-pattern ‘/’
+* web.xml매핑 설정에서 걸리지 않은 모든 url에 관한 매핑이다.
+* 즉 url-pattern의 else 역할이다
+* 이를 이용해 하나의 서블릿에서 모든 매핑을 진행할 수도 있다
+![image](https://user-images.githubusercontent.com/82793713/126639585-acda0f90-0c7c-4017-b8f9-725fb0e94dfd.png)
+### 이런 식으로 하면 /chap06/music을 하면 서블릿 /music을 따로 만들지 않더라도 music에 대한 내용이 시작되고 blog면 blog에 대한 내용이 시작됨  
 
