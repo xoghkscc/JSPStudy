@@ -84,7 +84,10 @@ public class AddInfo extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 		return wcList;
+	}
+	
+	public void setWinLost(int win_id) {
+		
 	}
 }

@@ -8,10 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${itemList }" var="itemList">
-		<div>
-			${itemList }
-		</div>
-	</c:forEach>
+	<form action="../vote" method="post">
+		<select name="win_id">
+			<c:forEach items="${itemList }" var="itemList">
+				<option value="${itemList.id }">${itemList }</option>
+			</c:forEach>
+		</select>
+		<input type="submit" value="vote!" />
+	</form>
 </body>
 </html>

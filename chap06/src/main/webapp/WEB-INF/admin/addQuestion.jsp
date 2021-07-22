@@ -8,7 +8,8 @@
 <title>새 질문 등록 페이지</title>
 </head>
 <body>
-	<select name="option">
+	<select id="optionchoose" name="optionchoose">
+		<option value=" "></option>
 		<option value="2">2강</option>
 		<option value="4">4강</option>
 		<option value="8">8강</option>
@@ -16,19 +17,27 @@
 		<option value="32">32강</option>
 		<option value="64">64강</option>
 	</select>
-	<c:if test="${!empty option.value }">
-		<form action="../addInfo" method="post">
-			<div>
-				새 질문을 등록하세요: <input type="text" name="title" />
-			</div>
-			<c:forEach begin="1" end="${option.value }" var="i">
+		<c:if test="${!empty param.optionchoose }">
+			<div>${param.optionchoose }강</div>
+			<form action="../addInfo" method="post">
 				<div>
-					항목 <input type="text" name="name" />
+					새 질문을 등록하세요: <input type="text" name="title" />
 				</div>
-			</c:forEach>
-	</c:if>
+				<c:forEach begin="1" end='<%=Integer.parseInt(request.getParameter("optionchoose")) %>' var="i">
+					<div>
+						항목 <input type="text" name="name" />
+					</div>
+				</c:forEach>
+				<input type="submit" value="등록하기" />
+			</form>
+		</c:if>
 
-	<input type="submit" value="등록하기" />
-	</form>
+	<script>
+		var selectBox = document.getElementById("optionchoose");
+		selectBox.addEventListener('change', (e) => {
+		var choose = selectBox.options[selectBox.selectedIndex].value;
+		location.href = "./addQuestion?optionchoose="+choose;
+	})
+	</script>
 </body>
 </html>

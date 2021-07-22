@@ -59,9 +59,9 @@
 		${animal }
 	</c:forTokens>
 	
-<%-- 	<c:if test="${empty login }"> --%>
-<%-- 		<c:redirect url="http://naver.com"></c:redirect> --%>
-<%-- 	</c:if> --%>
+	<c:if test="${empty login }">
+		<c:redirect url="http://naver.com"></c:redirect>
+	</c:if>
 	
 	만들어진 URL:
 	<c:url value="/news/add"><!-- /chap04/news/add -->
